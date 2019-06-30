@@ -1,0 +1,448 @@
+<FluentXMLReport>
+<version>
+Fluent
+Version: 3d, pbns, spe, rngke (3d, pressure-based,  species, RNG k-epsilon)
+Release: 17.0.0
+Title: 
+</version>
+
+<Models>
+
+Models
+------
+
+   Model                              Settings                         
+   -----------------------------------------------------------------
+   Space                              3D                               
+   Time                               Steady                           
+   Viscous                            RNG k-epsilon turbulence model   
+   Wall Treatment                     Standard Wall Functions          
+   RNG Differential Viscosity Model   Disabled                         
+   RNG Swirl Dominated Flow Option    Disabled                         
+   Heat Transfer                      Enabled                          
+   Solidification and Melting         Disabled                         
+   Radiation                          None                             
+   Species                            Non-Reacting (5 species)         
+   Coupled Dispersed Phase            Disabled                         
+   NOx Pollutants                     Disabled                         
+   SOx Pollutants                     Disabled                         
+   Soot                               Disabled                         
+   Mercury Pollutants                 Disabled                         
+
+</Models>
+
+<MaterialProperties>
+Material Properties
+-------------------
+
+   Material: methane-air (mixture)
+
+      Property               Units    Method                     Value(s)              
+      ------------------------------------------------------------------------------
+      Mixture Species                 names                      (ch4 o2 co2 h2o n2)   
+      Density                kg/m3    incompressible-ideal-gas   #f                    
+      Cp (Specific Heat)     j/kg-k   mixing-law                 #f                    
+      Thermal Conductivity   w/m-k    constant                   0.0454                
+      Viscosity              kg/m-s   constant                   1.72e-05              
+      Mass Diffusivity       m2/s     constant-dilute-appx       (2.88e-05)            
+      Speed of Sound         m/s      none                       #f                    
+
+   Material: (nitrogen . methane-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                    
+      ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   j/kg-k     polynomial   (300-1000: 979.04298 0.4179639 -0.0011762792 1.6743943e-06 -7.2562971e-10) (1000-5000: 868.62291 0.44162954 -0.00016872295 2.9967875e-08 -2.0043858e-12)    
+      Molecular Weight     kg/kgmol   constant     28.0134                                                                                                                                                     
+      Speed of Sound       m/s        none         #f                                                                                                                                                          
+
+   Material: (water-vapor . methane-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                  
+      ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   j/kg-k     polynomial   (300-1000: 1563.0767 1.6037546 -0.0029327841 3.2161009e-06 -1.1568268e-09) (1000-5000: 1233.2338 1.4105233 -0.00040291411 5.5427718e-08 -2.949824e-12)    
+      Molecular Weight     kg/kgmol   constant     18.01534                                                                                                                                                  
+      Speed of Sound       m/s        none         #f                                                                                                                                                        
+
+   Material: (carbon-dioxide . methane-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                   
+      -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   j/kg-k     polynomial   (300-1000: 429.92889 1.8744735 -0.001966485 1.2972514e-06 -3.9999562e-10) (1000-5000: 841.37645 0.59323928 -0.00024151675 4.5227279e-08 -3.1531301e-12)    
+      Molecular Weight     kg/kgmol   constant     44.00995                                                                                                                                                   
+      Speed of Sound       m/s        none         #f                                                                                                                                                         
+
+   Material: (oxygen . methane-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                      
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   j/kg-k     polynomial   (300-1000: 834.82647 0.29295801 -0.00014956371 3.4138849e-07 -2.2783585e-10) (1000-5000: 960.75234 0.15941258 -3.2708852e-05 4.6127648e-09 -2.9528324e-13)    
+      Molecular Weight     kg/kgmol   constant     31.9988                                                                                                                                                       
+      Speed of Sound       m/s        none         #f                                                                                                                                                            
+
+   Material: (methane . methane-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                               
+      -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   j/kg-k     polynomial   (300-1000: 403.5847 9.0573346 -0.014425086 1.5805188e-05 -6.3430511e-09) (1000-5000: 872.46708 5.3054727 -0.002008295 3.5166462e-07 -2.3339102e-11)    
+      Molecular Weight     kg/kgmol   constant     16.04303                                                                                                                                               
+      Speed of Sound       m/s        none         #f                                                                                                                                                     
+
+   Material: air (fluid)
+
+      Property                        Units      Method     Value(s)     
+      ----------------------------------------------------------------
+      Density                         kg/m3      constant   1.225        
+      Cp (Specific Heat)              j/kg-k     constant   1006.43      
+      Thermal Conductivity            w/m-k      constant   0.0242       
+      Viscosity                       kg/m-s     constant   1.7894e-05   
+      Molecular Weight                kg/kgmol   constant   28.966       
+      Thermal Expansion Coefficient   1/k        constant   0            
+      Speed of Sound                  m/s        none       #f           
+
+   Material: aluminum (solid)
+
+      Property               Units    Method     Value(s)   
+      ---------------------------------------------------
+      Density                kg/m3    constant   2719       
+      Cp (Specific Heat)     j/kg-k   constant   871        
+      Thermal Conductivity   w/m-k    constant   202.4      
+
+</MaterialProperties>
+
+<CellZoneConditions>
+Cell Zone Conditions
+--------------------
+
+   Zones
+
+      name          id   type    
+      ------------------------
+      liexi         11   fluid   
+      gongzuomian   12   fluid   
+      jfh           13   fluid   
+      hfh           14   fluid   
+      maoluo        15   fluid   
+
+   Setup Conditions
+
+      liexi
+
+         Condition                         Value                                                                                                                                                                                                                                     
+         -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         Specify source terms?             yes                                                                                                                                                                                                                                       
+         Source Terms                      ((mass) (x-momentum) (y-momentum) (z-momentum) (k) (epsilon) (species-0 ((constant . 1.5e-08) (inactive . #f) (profile  ))) (species-1 ((profile udf o2_consumption) (inactive . #f) (constant . 0))) (species-2) (species-3) (energy))   
+         Frame Motion?                     no                                                                                                                                                                                                                                        
+         Laminar zone?                     yes                                                                                                                                                                                                                                       
+         Porous zone?                      yes                                                                                                                                                                                                                                       
+         Direction-1 Viscous Resistance    (profile udf nianxing_x)                                                                                                                                                                                                                  
+         Direction-2 Viscous Resistance    (profile udf nianxing_y)                                                                                                                                                                                                                  
+         Direction-3 Viscous Resistance    (profile udf nianxing_z)                                                                                                                                                                                                                  
+         Direction-1 Inertial Resistance   (profile udf guanxing)                                                                                                                                                                                                                    
+         Direction-2 Inertial Resistance   (profile udf guanxing)                                                                                                                                                                                                                    
+         Direction-3 Inertial Resistance   (profile udf guanxing)                                                                                                                                                                                                                    
+         Porosity                          (profile udf porous_profile)                                                                                                                                                                                                              
+
+      gongzuomian
+
+         Condition       Value   
+         ---------------------
+         Frame Motion?   no      
+
+      jfh
+
+         Condition       Value   
+         ---------------------
+         Frame Motion?   no      
+
+      hfh
+
+         Condition       Value   
+         ---------------------
+         Frame Motion?   no      
+
+      maoluo
+
+         Condition                         Value                                                                                                                                                                                                                                       
+         ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         Specify source terms?             yes                                                                                                                                                                                                                                         
+         Source Terms                      ((mass) (x-momentum) (y-momentum) (z-momentum) (k) (epsilon) (species-0 ((constant . 2.685e-07) (inactive . #f) (profile  ))) (species-1 ((profile udf o2_consumption) (inactive . #f) (constant . 0))) (species-2) (species-3) (energy))   
+         Frame Motion?                     no                                                                                                                                                                                                                                          
+         Porous zone?                      yes                                                                                                                                                                                                                                         
+         Direction-1 Viscous Resistance    (profile udf nianxing_x)                                                                                                                                                                                                                    
+         Direction-2 Viscous Resistance    (profile udf nianxing_y)                                                                                                                                                                                                                    
+         Direction-3 Viscous Resistance    (profile udf nianxing_z)                                                                                                                                                                                                                    
+         Direction-1 Inertial Resistance   (profile udf guanxing)                                                                                                                                                                                                                      
+         Direction-2 Inertial Resistance   (profile udf guanxing)                                                                                                                                                                                                                      
+         Direction-3 Inertial Resistance   (profile udf guanxing)                                                                                                                                                                                                                      
+         Porosity                          (profile udf porous_profile)                                                                                                                                                                                                                
+
+</CellZoneConditions>
+
+<BoundaryConditions>
+Boundary Conditions
+-------------------
+
+   Zones
+
+      name                                        id   type             
+      ---------------------------------------------------------------
+      outlet                                      19   outflow          
+      wall-36                                     36   wall             
+      wall-35                                     35   wall             
+      wall-33                                     33   wall             
+      wall-32                                     32   wall             
+      wall-31                                     31   wall             
+      wall-28                                     28   wall             
+      wall-27                                     27   wall             
+      wall-liexi                                  1    wall             
+      wall-gongzuomian                            2    wall             
+      wall-jfh                                    3    wall             
+      wall-hfh                                    4    wall             
+      wall-maoluo                                 5    wall             
+      inlet                                       18   velocity-inlet   
+      contact_region-src                          20   interface        
+      contact_region-trg                          21   interface        
+      contact_region_2-contact_region_3-src       22   interface        
+      contact_region_2-contact_region_3-trg-jfh   23   interface        
+      contact_region_2-contact_region_3-trg-hfh   24   interface        
+      contact_region_4-src                        25   interface        
+      contact_region_4-trg                        26   interface        
+
+   Setup Conditions
+
+      outlet
+
+         Condition   Value   
+         -----------------
+
+      wall-36
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-35
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-33
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-32
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-31
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-28
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-27
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-liexi
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-gongzuomian
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-jfh
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-hfh
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      wall-maoluo
+
+         Condition                  Value   
+         --------------------------------
+         Thermal BC Type            1       
+         Wall Motion                0       
+         Shear Boundary Condition   0       
+
+      inlet
+
+         Condition                  Value                                                                                                                      
+         ---------------------------------------------------------------------------------------------------------------------------------------------------
+         Velocity Magnitude (m/s)   2.1                                                                                                                        
+                                    (((constant . 0) (profile  )) ((constant . 0.23) (profile  )) ((constant . 0) (profile  )) ((constant . 0) (profile  )))   
+
+      contact_region-src
+
+         Condition   Value   
+         -----------------
+
+      contact_region-trg
+
+         Condition   Value   
+         -----------------
+
+      contact_region_2-contact_region_3-src
+
+         Condition   Value   
+         -----------------
+
+      contact_region_2-contact_region_3-trg-jfh
+
+         Condition   Value   
+         -----------------
+
+      contact_region_2-contact_region_3-trg-hfh
+
+         Condition   Value   
+         -----------------
+
+      contact_region_4-src
+
+         Condition   Value   
+         -----------------
+
+      contact_region_4-trg
+
+         Condition   Value   
+         -----------------
+
+</BoundaryConditions>
+
+<SolverSettings>
+Solver Settings
+---------------
+
+   Equations
+
+      Equation     Solved   
+      -------------------
+      Flow         yes      
+      Turbulence   yes      
+      ch4          yes      
+      o2           yes      
+      co2          yes      
+      h2o          yes      
+      Energy       yes      
+
+   Numerics
+
+      Numeric                         Enabled   
+      ---------------------------------------
+      Absolute Velocity Formulation   yes       
+
+   Relaxation
+
+      Variable                     Relaxation Factor   
+      ----------------------------------------------
+      Pressure                     0.2                 
+      Density                      1                   
+      Body Forces                  1                   
+      Momentum                     0.7                 
+      Turbulent Kinetic Energy     0.8                 
+      Turbulent Dissipation Rate   0.8                 
+      Turbulent Viscosity          1                   
+      ch4                          0.5                 
+      o2                           0.5                 
+      co2                          1                   
+      h2o                          1                   
+      Energy                       0.5                 
+
+   Linear Solver
+
+                                   Solver     Termination   Residual Reduction   
+      Variable                     Type       Criterion     Tolerance            
+      ------------------------------------------------------------------------
+      Pressure                     V-Cycle    0.1                                
+      X-Momentum                   Flexible   0.1           0.7                  
+      Y-Momentum                   Flexible   0.1           0.7                  
+      Z-Momentum                   Flexible   0.1           0.7                  
+      Turbulent Kinetic Energy     Flexible   0.1           0.7                  
+      Turbulent Dissipation Rate   Flexible   0.1           0.7                  
+      ch4                          Flexible   0.1           0.7                  
+      o2                           Flexible   0.1           0.7                  
+      co2                          Flexible   0.1           0.7                  
+      h2o                          Flexible   0.1           0.7                  
+      Energy                       F-Cycle    0.1                                
+
+   Pressure-Velocity Coupling
+
+      Parameter   Value    
+      ------------------
+      Type        SIMPLE   
+
+   Discretization Scheme
+
+      Variable                     Scheme                
+      ------------------------------------------------
+      Pressure                     Second Order          
+      Momentum                     Second Order Upwind   
+      Turbulent Kinetic Energy     First Order Upwind    
+      Turbulent Dissipation Rate   First Order Upwind    
+      ch4                          Second Order Upwind   
+      o2                           Second Order Upwind   
+      co2                          Second Order Upwind   
+      h2o                          Second Order Upwind   
+      Energy                       Second Order Upwind   
+
+   Solution Limits
+
+      Quantity                         Limit    
+      ---------------------------------------
+      Minimum Absolute Pressure        1        
+      Maximum Absolute Pressure        5e+10    
+      Minimum Temperature              1        
+      Maximum Temperature              5000     
+      Minimum Turb. Kinetic Energy     1e-14    
+      Minimum Turb. Dissipation Rate   1e-20    
+      Maximum Turb. Viscosity Ratio    100000   
+
+</SolverSettings>
+
+</FluentXMLReport>
