@@ -115,12 +115,11 @@ DEFINE_PROFILE(nianxing_z, thread, position)
 }
 
 // 氧气消耗
-//o2_consumption
-DEFINE_SOURCE(o2_consumption, cell,thread,dS,i)   /*defining source of oxygen consumption*/
+DEFINE_SOURCE(o2_consumption, cell,thread,dS,i)  
 {
 
 	real R;
-	real s1 = C_YI(cell, thread, 1);   //oxygen mass fraction
+	real s1 = C_YI(cell, thread, 1);   
 	real T = C_T(cell, thread);
 	real x[ND_ND];
 	C_CENTROID(x, cell, thread);
@@ -132,5 +131,5 @@ DEFINE_SOURCE(o2_consumption, cell,thread,dS,i)   /*defining source of oxygen co
 		dS[i] = 0; 
 		R = 0; 
 	} 
-	return R;    /*oxygen consumption rate in porous media*/
+	return R;    
 }
